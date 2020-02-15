@@ -58,25 +58,34 @@ ggplot(data = teacher_tidy)+
 ```
 
 ```{r}
+library(ggalt)
+school_bullying <- read_csv("bullying.csv")
+view(school_bullying)
 
+
+ggplot(school_bullying, aes(x=male, xend=female, y=types_of_bullying))+
+  geom_segment(aes(x=male, xend=female,
+                   y=types_of_bullying, yend=types_of_bullying),
+               color="grey", size=1.5)+
+  geom_dumbbell(color="grey", 
+                size_x=3.5, 
+                size_xend = 3.5,
+                colour_x ="#00bfc4",
+                colour_xend = "#f8766d")+
+  geom_text(color="black", size=3, hjust=0.5, vjust=1.5,
+            aes(x=male, label=male))+
+  geom_text(aes(x=female, label=female), 
+            color="black", size=3, hjust=0.5,vjust=-1)+
+  labs(title = "Percentage of students who reported being bullied at\nschool in the U.S.public & private schools by sex, 2017",
+       subtitle = "Girls are more likely to report being Exculded from activities on purpose,\nMade fun of, called names, or insulted and Became subject of rumors.",
+       x=" % of students ages 12-18 who reported being bullied \nat scholl in the past year",
+       y="Types of bullying",
+       caption = "Source: U.S. Department of Education, National Center for Education Statistics")
+    
+  
+### Description:
+# There are significant gender differences for being Subject of rumors, being Made fun of/called names/insulted, being Excluded from activities on purpose, and being Pushed/shoved/tripped/spit on.
+# In general, girls suffer more from school bulling than boys, particularly in Subject of rumors, Made fun of/called names/insulted, and Excluded from activities on purpose.
+# Policymakers and psychological consultants need to be aware of the gender differences when designing emotional supportive activities at schools.
 ```
 
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
