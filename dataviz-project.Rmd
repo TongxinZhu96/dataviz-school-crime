@@ -24,10 +24,41 @@ ggplot(data=student_with_firearms, aes(x=year2015, y=year2009))+
        x= "Number of students who did this in school year 2015-16\nper 100,000 students enrolled",
        y= "Number of students who did this in school year 2009-10\nper 100,000 students enrolled")
 
-##Description:
+
+### Description:
 # Points/States above the reference line show a decrease in number of students who did this per 100,000 students enrolled in 2015-16 school year compared to 2009-10 school year while points/states below the line show an increase.
 # The reletive increase and absolute values of number of U.S. public school students (12-18) who brought firearms to or possessed firearms at school per 100,000 students enrolled show a worse situation in the South and Midwest.
 # Policies and lessons from Washington state (as well as states near original point) might be helpful for other states to improve safety issues.
+```
+
+```{r}
+teacher_threatened_attacked <- read_csv("teacher_attacked.csv")
+teacher_tidy <- 
+  gather(teacher_threatened_attacked, key = sex, value = percentage_pt, 2:3)
+view(teacher_tidy)
+
+
+ggplot(data = teacher_tidy)+
+  geom_line(mapping = aes(x=year, y=percentage_pt, color=sex))+
+  geom_text(mapping=aes(x=year, y=percentage_pt, 
+                        label=percentage_pt, vjust=1), size=3)+
+  facet_wrap(~type) +
+  labs(title = "Percentage of U.S. public school teachers who reported being threatened with \ninjury or physically attacked by a student from school",
+        subtitle = "Female teachers reported more physical attack while male teacher reported more threatened \nwith injury.",
+       caption = "Source: U.S. Department of Education, National Center for Education Statistics, 2017.",
+       y= "% of public school teachers who reported being hurted\n by a student from school during the previous 12 months",
+       x= "Year")
+  
+
+### Description:
+# In general, phycial attack against male teachers is declining at a more stable rate while showing an increasing trend for female teacher.
+# The probability of being threatened with injury is dropping at a higher rate for male teachers compared to female teachers.
+# Further investigation is needed to see what have contributed to the increase in both types of violence against female teacher from 2005 to 2010 in order to design intervention.
+# Schools might need to design different prevention stratagies for male and female teachers.
+```
+
+```{r}
+
 ```
 
 ## R Markdown
