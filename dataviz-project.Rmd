@@ -9,6 +9,27 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r}
+library(tidyverse)
+student_with_firearms <- read_csv("student_firearm.csv")
+
+ggplot(data=student_with_firearms, aes(x=year2015, y=year2009))+
+  geom_point(colour="#95B9D6", size=2)+
+  geom_abline(slope=1, intercept=0, colour="grey")+
+  geom_text(aes(label=State), size = 3)+
+  scale_y_continuous(labels = scales::number_format(accuracy = 0.1))+
+   labs(title = "Number of U.S. public school students who brought firearms to or possessed \nfirearms at school per 100,000 students enrolled varied dramatically by state",
+        subtitle = "The reletive increase and absolute values are higher in the South and Midwest.",
+       caption = "Source: U.S. Department of Education, National Center for Education Statistics, 2017.",
+       x= "Number of students who did this in school year 2015-16\nper 100,000 students enrolled",
+       y= "Number of students who did this in school year 2009-10\nper 100,000 students enrolled")
+
+##Description:
+# Points/States above the reference line show a decrease in number of students who did this per 100,000 students enrolled in 2015-16 school year compared to 2009-10 school year while points/states below the line show an increase.
+# The reletive increase and absolute values of number of U.S. public school students (12-18) who brought firearms to or possessed firearms at school per 100,000 students enrolled show a worse situation in the South and Midwest.
+# Policies and lessons from Washington state (as well as states near original point) might be helpful for other states to improve safety issues.
+```
+
 ## R Markdown
 
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
